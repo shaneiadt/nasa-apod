@@ -11,7 +11,6 @@ body {
   line-height: 1.8rem;
 }
 
-/* Large Smartphone (Vertical) */
 @media screen and (max-width: 800px) {
   body {
     line-height: 1.4rem;
