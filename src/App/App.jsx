@@ -11,11 +11,10 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState(null);
   const [favorites, setFavorites] = useState([]);
+  const api = 'https://api.nasa.gov/planetary/apod?api_key=m5YApP4hrckiYPOPQxyYGiNfsLjtBn0k3g52bViv';
 
   useEffect(() => {
-    fetch(
-      'https://api.nasa.gov/planetary/apod?api_key=m5YApP4hrckiYPOPQxyYGiNfsLjtBn0k3g52bViv',
-    )
+    fetch(api)
       .then((res) => res.json())
       .then((content) => {
         setData([content]);
