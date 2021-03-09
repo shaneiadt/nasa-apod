@@ -6,12 +6,13 @@ import Loader from '../Loader/Loader';
 import Message from '../Message/Message';
 import Images from '../Images/Images';
 
-function App() {
+export default () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState(null);
   const [favorites, setFavorites] = useState([]);
-  const api = 'https://api.nasa.gov/planetary/apod?api_key=m5YApP4hrckiYPOPQxyYGiNfsLjtBn0k3g52bViv';
+  const api =
+    'https://api.nasa.gov/planetary/apod?api_key=m5YApP4hrckiYPOPQxyYGiNfsLjtBn0k3g52bViv';
 
   useEffect(() => {
     fetch(api)
@@ -41,6 +42,4 @@ function App() {
       )}
     </>
   );
-}
-
-export default App;
+};
