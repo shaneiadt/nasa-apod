@@ -5,7 +5,7 @@ export default ({ data, addToFavorites }) => {
   return (
     <div className="card">
       <a href="" title="View Full Image" target="_blank">
-        <img className="card-img-top" src={data.hdurl} alt={data.title} />
+        <img className="card-img-top" src={data.url} alt={data.title} />
       </a>
       <div className="card-body">
         <h5 className="card-title">{data.title}</h5>

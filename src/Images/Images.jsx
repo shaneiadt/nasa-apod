@@ -4,11 +4,14 @@ import Card from '../Card/Card';
 
 import './Images.css';
 
-export default ({ images = [], addToFavorites }) =>
-  images.length > 0 && (
-    <div className="images-container">
-      {images.map((image) => (
-        <Card key={image.url} data={image} addToFavorites={addToFavorites} />
-      ))}
-    </div>
+export default ({ images = [], addToFavorites }) => { 
+  return (
+    images.length > 0 && (
+      <div className="images-container">
+        {images[0].map((image, i) => (
+          <Card key={i} data={image} addToFavorites={addToFavorites} />
+        ))}
+      </div>
+    )
   );
+};
