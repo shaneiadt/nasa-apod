@@ -12,15 +12,18 @@ export default () => {
   const [message, setMessage] = useState(null);
   const [favorites, setFavorites] = useState([]);
   const api =
-    'https://api.nasa.gov/planetary/apod?api_key=m5YApP4hrckiYPOPQxyYGiNfsLjtBn0k3g52bViv';
+    'https://api.nasa.gov/planetary/apod?api_key=m5YApP4hrckiYPOPQxyYGiNfsLjtBn0k3g52bViv&count=10';
 
-  useEffect(() => {
-    fetch(api)
-      .then((res) => res.json())
-      .then((content) => {
-        setData([content]);
-        setLoading(false);
-      });
+  useEffect(async () => {
+    try {
+      const response = await fetch(api);
+      const data = await response.json();
+
+      setData([data]);
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
   }, []);
 
   const addToFavorites = (item) => {
