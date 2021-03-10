@@ -30,6 +30,13 @@ export default () => {
     const newFavorites = [...favorites];
     newFavorites.push(item);
     setFavorites(newFavorites);
+
+    setMessage('ADDED');
+
+    const timeout = setTimeout(() => {
+      setMessage(null);
+      clearTimeout(timeout);
+    }, 1000);
   };
 
   return (

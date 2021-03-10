@@ -15,7 +15,7 @@ export default ({ data, addToFavorites }) => {
         <p className="card-text">{data.explanation}</p>
         <small className="text-muted">
           <strong>{data.date}</strong>&nbsp;
-          <span>Copyright Info</span>
+          {data.copyright && <span>Copyright Info {data.copyright}</span>}
         </small>
       </div>
     </div>
