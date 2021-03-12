@@ -11,6 +11,7 @@ export default () => {
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState(null);
   const [favorites, setFavorites] = useState([]);
+  const [view, setView] = useState('FEED');
   const api =
     'https://api.nasa.gov/planetary/apod?api_key=m5YApP4hrckiYPOPQxyYGiNfsLjtBn0k3g52bViv&count=10';
 
@@ -19,7 +20,11 @@ export default () => {
       const response = await fetch(api);
       const data = await response.json();
 
-      setData([data]);
+      if (localStorage.getItem('nasa-apod-favorites')) {
+        setFavorites(JSON.parse(localStorage.getItem('nasa-apod-favorites')));
+      }
+
+      setData(data);
       setLoading(false);
     } catch (error) {
       console.error(error);
@@ -29,6 +34,7 @@ export default () => {
   const addToFavorites = (item) => {
     const newFavorites = [...favorites];
     newFavorites.push(item);
+    localStorage.setItem('nasa-apod-favorites', JSON.stringify(newFavorites));
     setFavorites(newFavorites);
 
     setMessage('ADDED');
@@ -45,8 +51,11 @@ export default () => {
         <Loader />
       ) : (
         <>
-          <Nav />
-          <Images images={data} addToFavorites={addToFavorites} />
+          <Nav view={view} setView={setView} />
+          <Images
+            images={view === 'FEED' ? data : favorites}
+            addToFavorites={addToFavorites}
+          />
           {message && <Message text={message} />}
         </>
       )}
