@@ -1,7 +1,7 @@
 import React from 'react';
 import './Card.css';
 
-export default ({ data, addToFavorites }) => {
+export default ({ data, addToFavorites, removeFromFavorites, isFavorite }) => {
   return (
     <div className="card">
       <a href="" title="View Full Image" target="_blank">
@@ -9,8 +9,13 @@ export default ({ data, addToFavorites }) => {
       </a>
       <div className="card-body">
         <h5 className="card-title">{data.title}</h5>
-        <p className="clickable" onClick={() => addToFavorites(data)}>
-          Add to Favorites
+        <p
+          className="clickable"
+          onClick={() =>
+            !isFavorite(data) ? addToFavorites(data) : removeFromFavorites(data)
+          }
+        >
+          {!isFavorite(data) ? 'Add to Favorites' : 'Remove from Favorites'}
         </p>
         <p className="card-text">{data.explanation}</p>
         <small className="text-muted">

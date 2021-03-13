@@ -31,6 +31,8 @@ export default () => {
     }
   }, []);
 
+  const isFavorite = (item) => favorites.find((i) => i.title === item.title);
+
   const addToFavorites = (item) => {
     const newFavorites = [...favorites];
     newFavorites.push(item);
@@ -38,6 +40,21 @@ export default () => {
     setFavorites(newFavorites);
 
     setMessage('ADDED');
+
+    const timeout = setTimeout(() => {
+      setMessage(null);
+      clearTimeout(timeout);
+    }, 1000);
+  };
+
+  const removeFromFavorites = (item) => {
+    if (!isFavorite(item)) return;
+
+    const filtered = favorites.filter((d) => d.title !== item.title);
+    localStorage.setItem('nasa-apod-favorites', JSON.stringify(filtered));
+    setFavorites(filtered);
+
+    setMessage('REMOVED');
 
     const timeout = setTimeout(() => {
       setMessage(null);
@@ -55,6 +72,8 @@ export default () => {
           <Images
             images={view === 'FEED' ? data : favorites}
             addToFavorites={addToFavorites}
+            removeFromFavorites={removeFromFavorites}
+            isFavorite={isFavorite}
           />
           {message && <Message text={message} />}
         </>
